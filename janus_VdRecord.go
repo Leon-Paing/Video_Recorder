@@ -90,7 +90,6 @@ func main() {
 	}
 	defer resp.Body.Close()
 
-	// Handle HTTP status codes
 	if resp.StatusCode != http.StatusOK {
 		body, _ := ioutil.ReadAll(resp.Body)
 		fmt.Printf("HTTP error %d: %s\n", resp.StatusCode, string(body))
