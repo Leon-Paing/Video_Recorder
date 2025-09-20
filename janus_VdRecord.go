@@ -5,13 +5,16 @@ import (
 	"encoding/json"
 	"fmt"
 	"io/ioutil"
+	"log"
 	"net/http"
+	"os"
 	"time"
+
+	"github.com/joho/godotenv"
 )
 
 // ================= CONFIGURATION =================
 const (
-	JANUS_ADMIN_URL = "http://main-janus.tueyena.com:8188/admin"
 	JANUS_ADMIN_KEY = "supersecret"
 	STREAM_ID       = 100
 )
@@ -38,6 +41,14 @@ type Payload struct {
 }
 
 func main() {
+	//Load env
+	err := godotenv.Load()
+	if err != nil {
+		log.Println("No .env file found")
+	}
+
+	JANUS_ADMIN_URL := os.Getenv("JANUS_SERVER")
+
 	payload := Payload{
 		Janus:       "create",
 		Transaction: fmt.Sprintf("%d", time.Now().UnixNano()),
