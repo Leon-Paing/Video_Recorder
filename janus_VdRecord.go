@@ -13,12 +13,6 @@ import (
 	"github.com/joho/godotenv"
 )
 
-// ================= CONFIGURATION =================
-const (
-	JANUS_ADMIN_KEY = "supersecret"
-	STREAM_ID       = 100
-)
-
 type Media struct {
 	Type    string `json:"type"`
 	Mid     string `json:"mid"`
@@ -48,6 +42,8 @@ func main() {
 	}
 
 	JANUS_ADMIN_URL := os.Getenv("JANUS_SERVER")
+	JANUS_ADMIN_KEY := os.Getenv("JANUS_ADMIN_KEY")
+	var STREAM_ID = 100
 
 	payload := Payload{
 		Janus:       "create",
